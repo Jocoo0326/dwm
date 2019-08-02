@@ -35,8 +35,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gvim",           NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Google-chrome",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Emacs",          NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "VirtualBox Manager",  NULL,  NULL,       1 << 4,       0,           -1 },
 };
 
 /* layout(s) */
@@ -54,7 +56,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -68,6 +70,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *volupcmd[]  = { "amixer", "-q", "set", "Master", "5%+", NULL };
+static const char *voldowncmd[]  = { "amixer", "-q", "set", "Master", "5%-", NULL };
+static const char *volmutecmd[]  = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *emacscmd[]  = { "emacs", NULL };
+static const char *vimcmd[]  = { "gvim", NULL };
+static const char *chromecmd[]  = { "google-chrome-stable", NULL };
+static const char *virtualboxcmd[]  = { "virtualbox", NULL };
+static const char *lockcmd[]  = { "xlock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -106,6 +116,14 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  { 0,                            0x1008ff12, spawn,         {.v = volmutecmd } },
+  { 0,                            0x1008ff13, spawn,         {.v = volupcmd } },
+  { 0,                            0x1008ff11, spawn,         {.v = voldowncmd } },
+  { MODKEY|ShiftMask,             XK_m,       spawn,         {.v = emacscmd } },
+  { MODKEY|ShiftMask,             XK_g,       spawn,         {.v = vimcmd } },
+  { MODKEY|ShiftMask,             XK_b,       spawn,         {.v = chromecmd } },
+  { MODKEY|ShiftMask,             XK_v,       spawn,         {.v = virtualboxcmd } },
+  { MODKEY|ShiftMask,             XK_l,       spawn,         {.v = lockcmd } },
 };
 
 /* button definitions */
