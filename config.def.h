@@ -77,12 +77,12 @@ static const char *emacscmd[]  = { "emacs", NULL };
 static const char *vimcmd[]  = { "gvim", NULL };
 static const char *chromecmd[]  = { "google-chrome-stable", NULL };
 static const char *virtualboxcmd[]  = { "virtualbox", NULL };
-static const char *lockcmd[]  = { "xlock", NULL };
+static const char *lockcmd[]  = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -92,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[2]} },
@@ -115,7 +115,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
   { 0,                            0x1008ff12, spawn,         {.v = volmutecmd } },
   { 0,                            0x1008ff13, spawn,         {.v = volupcmd } },
   { 0,                            0x1008ff11, spawn,         {.v = voldowncmd } },
